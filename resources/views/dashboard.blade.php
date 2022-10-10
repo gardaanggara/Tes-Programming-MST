@@ -17,7 +17,7 @@
                             <div class="card-body">
                                 <h2>Transaksi</h2>
                                 <div class="container">
-                                    <form action="<form action="{{route('transaction.store')}}" method="POST">
+                                    <form action="{{route('transaction.store')}}" method="POST">
                                         @csrf
                                         <div class="form-group row align-items-center mb-4">
                                             <div class="col">
@@ -41,11 +41,13 @@
                                                 <label>Kode Pembeli</label>
                                             </div>
                                             <div class="col-12 col-md">
-                                                <select class="form-control" name="kode" id="kode">
-                                                    <option data-id='null'>Pilih Kode Pembeli</option>
-                                                    {{-- @foreach($ListCustomer as $cust) --}}
-                                                    {{-- <option value="{{$cust->id}}" data-id='{{$cust->id}}'>{{$cust->name}}</option> --}}
-                                                    {{-- @endforeach --}}
+                                                <select class="form-control" name="kode" id="carinama">
+                                                    <option data-id='null' >Pilih Pembeli</option>
+                                                    @foreach($Cust as $kd)
+                                                        <option value="{{$kd->id}}" 
+                                                            data-id='{{$kd->id}}' 
+                                                            >{{$kd->id}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
