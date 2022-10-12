@@ -13,7 +13,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $Cust = m_customer::all();
+        return view('dashboard',['Cust' => $Cust]);
     }
 
     /**

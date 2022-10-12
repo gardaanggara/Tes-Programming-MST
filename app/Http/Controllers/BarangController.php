@@ -15,7 +15,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        //
+        $ListBarang = m_barang::all();
+        return view('manageitem', ['ListBarang' => $ListBarang]);
     }
 
     /**
@@ -67,7 +68,8 @@ class BarangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $barang = m_barang::findOrFail($id);
+        return view('manageitem-edit', ['barang' => $barang]);
     }
 
     /**
@@ -79,7 +81,16 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $barang = m_barang::findOrFail($id);
+        $barang->kode = $request->kode;
+        $barang->nama = $request->nama;
+        $barang->harga = $request->harga;
+        $barang->update();
+        // dd($barang->update);
+        // $valdiate = $request->validate([
+        // 'kategori' => 'numeric',
+        // ]);
+        return redirect(route('barang.index'));
     }
 
     /**
@@ -90,6 +101,8 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $barang = m_barang::find($id);
+        $barang->delete();
+        return redirect()->back();
     }
 }
