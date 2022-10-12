@@ -15,7 +15,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $ListPembeli = m_customer::all();
+        return view('managecustomer', ['ListPembeli' => $ListPembeli]);
     }
 
     /**
@@ -67,7 +68,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cust = m_customer::findOrFail($id);
+        return view('managecustomer-edit', ['cust' => $cust]);
     }
 
     /**
@@ -79,7 +81,16 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $barang = m_customer::findOrFail($id);
+        $barang->kode = $request->kode;
+        $barang->name = $request->name;
+        $barang->telp = $request->telp;
+        $barang->update();
+        // dd($barang->update);
+        // $valdiate = $request->validate([
+        // 'kategori' => 'numeric',
+        // ]);
+        return redirect(route('customer.index'));
     }
 
     /**
@@ -90,6 +101,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cust = m_customer::find($id);
+        $cust->delete();
+        return redirect()->back();
     }
 }

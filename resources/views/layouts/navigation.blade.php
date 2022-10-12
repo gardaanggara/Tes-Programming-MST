@@ -15,10 +15,10 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    {{-- <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Pengelolaan Data Admin') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                    </x-nav-link> --}}
+                    <x-nav-link :href="route('customer.index')" :active="request()->routeIs('customer.index')">
                         {{ __('Pengelolaan Data Pembeli') }}
                     </x-nav-link>
                     <x-nav-link :href="route('barang.index')" :active="request()->routeIs('barang.index')">

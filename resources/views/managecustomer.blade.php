@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                             <div class="card-body">
                                 
-                                        <h2> Daftar Barang </h2>
+                                        <h2> Daftar Pembeli </h2>
                                         <div class="table-responsive">
                                             <table class="table mt-3">
                                                 <thead>
@@ -19,21 +19,21 @@
                                                     <th scope="col">No</th>
                                                     <th scope="col">Kode</th>
                                                     <th scope="col">Nama</th>
-                                                    <th scope="col">Harga</th>
+                                                    <th scope="col">No Telepon</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($ListBarang as $key => $d)
+                                                    @foreach($ListPembeli as $key => $d)
                                                     <td>{{$key+1 }}</td>
                                                     <td>{{$d->kode }}</td>
-                                                    <td>{{$d->nama }}</td>
-                                                    <td>Rp. {{$d->harga}}</td>
+                                                    <td>{{$d->name }}</td>
+                                                    <td>{{$d->telp}}</td>
                                                     <td>
-                                                        <form action="{{ route('barang.destroy', $d->id) }}" method="post">
+                                                        <form action="{{ route('customer.destroy', $d->id) }}" method="post">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a href="{{ route('barang.edit', $d->id) }}" class="btn btn-success">Edit</a>
+                                                            <a href="{{ route('customer.edit', $d->id) }}" class="btn btn-success">Edit</a>
                                                             <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin?')">
                                                                 Hapus
                                                             </button>

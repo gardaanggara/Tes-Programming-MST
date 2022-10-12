@@ -11,10 +11,10 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                             <div class="card-body">
                                 
-                                        <h2> Data Barang </h2>
+                                        <h2> Data Pembeli </h2>
                                         <div class="card-body">
                                             <div class="container">
-                                                <form action="{{route('barang.update', $barang->id)}}" method="POST">
+                                                <form action="{{route('customer.update', $cust->id)}}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="form-group row align-items-center mb-4">
@@ -22,7 +22,7 @@
                                                             <label>Kode</label>
                                                         </div>
                                                         <div class="col-12 col-md">
-                                                            <input type="text" required class="form-control" name="kode" value="{{$barang->kode}}"/>
+                                                            <input type="text" required class="form-control" name="kode" value="{{$cust->kode}}"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row align-items-center mb-4">
@@ -30,15 +30,15 @@
                                                             <label>Nama</label>
                                                         </div>
                                                         <div class="col-12 col-md">
-                                                            <input type="tet" required class="form-control" name="name" value="{{$barang->name}}"/>
+                                                            <input type="tet" required class="form-control" name="name" value="{{$cust->name}}"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row align-items-center mb-4">
                                                         <div class="col">
-                                                            <label>Harga</label>
+                                                            <label>No Telepon</label>
                                                         </div>
                                                         <div class="col-12 col-md">
-                                                            <input type="text" required class="form-control" name="harga" value="{{$barang->harga}}"/>
+                                                            <input type="text" required class="form-control" name="telp" value="{{$cust->telp}}"/>
                                                         </div>
                                                     </div>
                                                 <div class="text-end">
