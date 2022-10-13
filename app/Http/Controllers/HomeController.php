@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\m_customer;
-
+use App\Models\m_barang;
 
 class HomeController extends Controller
 {
@@ -17,7 +17,8 @@ class HomeController extends Controller
     public function index()
     {
         $Cust = m_customer::all();
-        return view('dashboard',['Cust' => $Cust]);
+        $Barang = m_barang::all();
+        return view('dashboard',['Cust' => $Cust, 'Barang' => $Barang]);
     }
 
     /**
@@ -25,6 +26,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function datapembeli($id)
+    {
+        $nama = m_customer::findOrFail($id)->where('id', $id)->pluck('nama');
+        return json_encode($nama); 
+    }
+
     public function create()
     {
         //

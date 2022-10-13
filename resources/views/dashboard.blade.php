@@ -46,6 +46,8 @@
                                                     @foreach($Cust as $kd)
                                                         <option value="{{$kd->id}}" 
                                                             data-id='{{$kd->id}}' 
+                                                            data-nama='{{$kd->nama}}'
+                                                            data-telp='{{$kd->telp}}'
                                                             >Kode {{$kd->id}} - {{$kd->name}}</option>
                                                     @endforeach
                                                 </select>
@@ -56,7 +58,7 @@
                                                 <label>Nama Pembeli</label>
                                             </div>
                                             <div class="col-12 col-md">
-                                                <input type="text" required class="form-control" name="name" disabled/>
+                                                <input type="text" required class="form-control" id="name" name="name" disabled/>
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center mb-4">
@@ -64,7 +66,7 @@
                                                 <label>Nomor Telepon</label>
                                             </div>
                                             <div class="col-12 col-md">
-                                                <input type="text" required class="form-control" name="telp" disabled/>
+                                                <input type="text" required class="form-control" id="telp" name="telp" disabled/>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal4" data-bs-whatever="@getbootstrap">Tambah Pemesanan</button>
@@ -183,7 +185,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                         <button type="button" class="btn btn-primary">Send message</button>
                                     </div>
                                 </div>
@@ -203,34 +205,29 @@
                                               <label for="exampleInputEmail1" class="form-label">Pilih Barang</label>
                                                 <div class="dropdown">
                                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                  Dropdown button
+                                                  Pilih Barang
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                  <li><a class="dropdown-item" href="#">Action</a></li>
-                                                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                    @foreach ($Barang as $item)
+                                                    <li><a class="dropdown-item" value="{{$item->id}}" data-id="{{$item->id}}">Kode Barang - {{$item->kode}} - {{$item->nama}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                               </div>
                                             </div>
                                             <div class="mb-3">
-                                              <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                                              <label for="exampleInputEmail1" class="form-label">Jumlah Pembelian</label>
+                                              <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                              <div id="emailHelp" class="form-text">Masukkan Jumlah Pembelian</div>
                                             </div>
                                             <div class="mb-3">
-                                              <label for="exampleInputPassword1" class="form-label">Password</label>
-                                              <input type="password" class="form-control" id="exampleInputPassword1">
-                                            </div>
-                                            <div class="mb-3 form-check">
-                                              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                          </form>
+                                                <label for="exampleInputEmail1" class="form-label">Pilih Barang Lagi?</label>
+                                                <button type="submit" class="btn btn-primary">Pilih</button>
+                                              </div>
+                                        </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Send message</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="button" class="btn btn-primary">Ke Pembayaran</button>
                                     </div>
                                     </div>
                                 </div>
@@ -239,4 +236,34 @@
             </div>
         </div>
     </div>
+    <x-slot name="text/javascript">
+        <script type="text/javascript">
+            jQuery(document).ready(function (){
+                jQuery('select[name="kode"]').on('change', function(){
+                    var id = jQuery(this).val();
+
+                    nama = $(this).find(':selected').attr('data-nama');
+                    $('#nama').val(nama);
+                    telp = $(this).find(':selected').attr('data-telp');
+                    $('#telp').val(telp);
+
+                    if(id)
+                    {
+                        jQuery.ajax({
+                            url : 'identitaspembeli/' +id,
+                            type : "GET",
+                            dataType : "json",
+                            success:function(data)
+                            {
+                                console.log(data);
+                                jQuery.each(data, function(key, value){
+                                    $('input[name="nama"]').val(value);
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+        </script>
+    </x-slot>
 </x-app-layout>

@@ -30,3 +30,4 @@ Route::resource('/barang', BarangController::class);
 Route::resource('/customer', CustomerController::class);
 Route::resource('/transaction', TransactionController::class);
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth'])->name('home');
+Route::get('/identitaspembeli/{id}', [CustomerController::class, 'datapembeli'])->name('data');
